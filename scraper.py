@@ -7,7 +7,14 @@ from bs4 import BeautifulSoup
 
 # Set up variables
 entity_id = "LCD047_MOJ_gov"
-url = "https://www.gov.uk/government/publications/ministry-of-justice-spend-over-25000-201"
+pages = [
+  'https://www.gov.uk/government/publications/spend-over-25-000-archive',
+  'https://www.gov.uk/government/publications/spend-over-25-000',
+  'https://www.gov.uk/government/publications/ministry-of-justice-spend-over-25000-2013',
+  'https://www.gov.uk/government/publications/ministry-of-justice-spend-over-25000-2014',
+  'https://www.gov.uk/government/publications/ministry-of-justice-spend-over-25000-2015'
+  ]
+
 
 # Set up functions
 def convert_mth_strings ( mth_string ):
@@ -18,27 +25,13 @@ def convert_mth_strings ( mth_string ):
 		mth_string = mth_string.replace(k, v)
 	return mth_string
 
-# pull down the content from the webpage
-html = urllib2.urlopen(url)
-soup = BeautifulSoup(html)
-
-# find all entries with the required class
-pages = [
-  'https://www.gov.uk/government/publications/spend-over-25-000-archive',
-  'https://www.gov.uk/government/publications/spend-over-25-000',
-  'https://www.gov.uk/government/publications/ministry-of-justice-spend-over-25000-2013',
-  'https://www.gov.uk/government/publications/ministry-of-justice-spend-over-25000-2014',
-  'https://www.gov.uk/government/publications/ministry-of-justice-spend-over-25000-2015'
-  ]
 
 for page in pages:
 
-	# add the right prefix onto the url
+	html = urllib.urlopen(page)
+	soup = BeautifulSoup(html)
 	
-	html2 = urllib2.urlopen(page)
-	soup2 = BeautifulSoup(html2)
-	
-	fileBlocks = soup2.findAll('div',{'class':'attachment-details'})
+	fileBlocks = soup.findAll('div',{'class':'attachment-details'})
 	
 	for fileBlock in fileBlocks:
 		fileUrl = fileBlock.a['href']
