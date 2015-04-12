@@ -45,6 +45,7 @@ for page in pages:
 			print 'not a csv'
 		else:
 			# create the right strings for the new filename
+			title = title.replace('spend data','')
 			title = title.upper().strip()
 			csvYr = title.split(' ')[-1]
 			csvYr = csvYr.replace("200","20")
