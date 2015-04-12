@@ -28,7 +28,7 @@ def convert_mth_strings ( mth_string ):
 
 for page in pages:
 
-	html = urllib.urlopen(page)
+	html = urllib2.urlopen(page)
 	soup = BeautifulSoup(html)
 	
 	fileBlocks = soup.findAll('div',{'class':'attachment-details'})
