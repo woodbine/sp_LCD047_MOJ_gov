@@ -59,4 +59,5 @@ for page in pages:
 		
 			scraperwiki.sqlite.save(unique_keys=['l'], data={"l": fileUrl, "f": filename, "d": todays_date })
 			
+			print fileUrl
 			print filename
